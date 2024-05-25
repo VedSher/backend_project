@@ -2,6 +2,7 @@
   "name": "chai-aur-backend",
   "version": "1.0.0",
   "description": "a backend at my project",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,5 +13,13 @@
     "chai"
   ],
   "author": "Ved",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VedSher/backend_project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VedSher/backend_project/issues"
+  },
+  "homepage": "https://github.com/VedSher/backend_project#readme"
 }
