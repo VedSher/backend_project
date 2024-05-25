@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/VedSher/backend_project#readme",
   "devDependencies": {
-    "nodemon": "^3.1.1"
+    "nodemon": "^3.1.1",
+    "prettier": "^3.2.5"
   }
 }
