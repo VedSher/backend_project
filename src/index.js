@@ -12,24 +12,24 @@ dotenv.config({
   path: './env'
 })
 
-connectDB();
+
+connectDB()
+.then(() => {
+  app.on("error", (error) => {
+    console.log("Error: ", error);
+    throw error
+  })
+  app.listen(process.env.PORT || 8000, () => {
+    console.log(` Server is running at PORT : ${process.env.PORT}`)
+  })
+})
+app.on("err", (err) => {
+  console.log("Error aaya h:", err);
+  throw err;
+})
+.catch((err) => {
+  console.log("Mongo DB connection fail !!!", err);
+})
 
 
 
-// ( async () => {
-//   try {
-//     await mongoose.connect(`${process.env.
-//       MONGO_URL}/${DB_NAME}`)
-//       app.on("error", (err) => {
-//         console.log("Error aya hai: ",err);
-//         throw err
-//       })
-
-//       app.listen(process.env.PORT, () => {
-//         console.log(`App is Listening on port ${process.env.PORT}`);
-//       })
-//   }catch (err){
-//     console.error("ERROR: ", err);
-//     throw err
-//   }
-// }) ()
