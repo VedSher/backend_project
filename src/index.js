@@ -15,17 +15,13 @@ dotenv.config({
 
 connectDB()
 .then(() => {
-  app.on("error", (error) => {
-    console.log("Error: ", error);
-    throw error
-  })
   app.listen(process.env.PORT || 8000, () => {
     console.log(` Server is running at PORT : ${process.env.PORT}`)
   })
-})
-app.on("err", (err) => {
-  console.log("Error aaya h:", err);
-  throw err;
+  app.on("err", (err) => {
+    console.log("Error aaya h:", err);
+    throw err;
+  })
 })
 .catch((err) => {
   console.log("Mongo DB connection fail !!!", err);
