@@ -166,8 +166,8 @@ const logoutUser = asyncHandler( async( req , res ) => {
     const user = await User.findByIdAndUpdate(
         req.user._id,
         {
-            $set: {
-                refreshToken: undefined
+            $unset: {
+                refreshToken: 1
             }
         },
         {
@@ -295,8 +295,8 @@ const updateAccountDetails = asyncHandler( async(req, res) =>{
 })
 
 const updateUserAvatar = asyncHandler(async(req, res) => {
-    const avatarLocalPath = req.files?.path
-
+    const avatarLocalPath = req.file?.path
+    console.log(req.file)
     if (!avatarLocalPath) {
         throw new ApiError(400, "Avatar file is missing")
     }
@@ -305,9 +305,16 @@ const updateUserAvatar = asyncHandler(async(req, res) => {
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
 
+    const ogavatar = await User.findById(
+      {req.user?._id},{},
+      {new: true}
+    ).select("-password")
+    );
+    await removeCloudinary(ogavatar);
+
+
     if (!avatar.url) {
         throw new ApiError(400, "Error while uploading on avatar")
-        
     }
 
     const user = await User.findByIdAndUpdate(
